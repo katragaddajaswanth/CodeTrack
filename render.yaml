@@ -4,7 +4,7 @@ services:
     runtime: python
     plan: free
     buildCommand: pip install -r backend/requirements.txt
-    startCommand: gunicorn backend.app:app --bind 0.0.0.0:$PORT --workers 2 --timeout 60
+    startCommand: python -m gunicorn backend.app:app --bind 0.0.0.0:$PORT --workers 2 --timeout 60
     healthCheckPath: /api/health
     envVars:
       - key: CODETRACK_SECRET_KEY

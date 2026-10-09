@@ -27,7 +27,7 @@ git push -u origin main
 1. Sign in at [render.com](https://render.com) → **New +** → **Blueprint**.
 2. Connect the GitHub repo. Render detects `render.yaml` automatically.
 3. Click **Apply**. Render builds (`pip install -r backend/requirements.txt`) and starts
-   `gunicorn backend.app:app --bind 0.0.0.0:$PORT`.
+   `python -m gunicorn backend.app:app --bind 0.0.0.0:$PORT`.
 4. Your app is live at `https://<service-name>.onrender.com`.
 
 ## 3. After first deploy
