@@ -1,0 +1,11 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Local environment / editor
+.env
+.vscode/
+
+# Local-only runtime data (backend/.gitignore also covers these)
+backend/codetrack.db
+backend/.codetrack-secret

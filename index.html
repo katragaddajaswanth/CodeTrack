@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CODETRACK coding progress dashboard.">
+  <title>CODETRACK / Coding Progress</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <section class="auth-screen" id="auth-screen">
+    <div class="auth-card">
+      <div class="brand auth-brand"><span class="brand-mark">C</span>CODETRACK</div>
+      <p class="kicker">Your coding workspace</p>
+      <h1 id="auth-title">Welcome back<span class="accent-dot">.</span></h1>
+      <p class="auth-copy" id="auth-copy">Sign in to continue tracking your progress.</p>
+      <form class="auth-form" id="auth-form">
+        <label>Email<input id="auth-email" type="email" required autocomplete="email" placeholder="you@example.com"></label>
+        <label>Password<input id="auth-password" type="password" required minlength="6" autocomplete="current-password" placeholder="At least 6 characters"></label>
+        <label class="signup-field hidden">Your name<input id="auth-name" type="text" maxlength="60" autocomplete="name" placeholder="Your name"></label>
+        <button class="primary-button auth-submit" type="submit" id="auth-submit">Sign in</button>
+        <p class="auth-error" id="auth-error" role="alert"></p>
+      </form>
+      <button class="auth-forgot" id="forgot-password" type="button">Forgot password?</button>
+      <button class="auth-switch" id="auth-switch" type="button">Create a new account</button>
+      <button class="auth-guest" id="auth-guest" type="button">Continue as guest (Offline mode)</button>
+    </div>
+  </section>
+
+  <div class="app-shell hidden" id="app-shell">
+    <aside class="sidebar" aria-label="Primary navigation">
+      <a class="brand" href="#dashboard" aria-label="CODETRACK home">
+        <span class="brand-mark">C</span>
+        <span>CODETRACK</span>
+      </a>
+
+      <button class="profile-card" id="profile-card" type="button" aria-label="Edit user details">
+        <div class="avatar">JK</div>
+        <div>
+          <strong>Your name</strong>
+          <span>CS student</span>
+        </div>
+        <span class="icon-button" aria-hidden="true">•••</span>
+      </button>
+
+      <nav class="nav-list">
+        <a class="nav-item active" href="#dashboard" data-page="dashboard"><span class="nav-icon">⌂</span>Dashboard</a>
+        <a class="nav-item" href="#problems" data-page="problems"><span class="nav-icon">◇</span>Problems</a>
+        <a class="nav-item" href="#stats" data-page="stats"><span class="nav-icon">▥</span>Stats</a>
+        <a class="nav-item" href="#activity" data-page="activity"><span class="nav-icon">◷</span>Activity</a>
+        <a class="nav-item" href="#profile" data-page="profile"><span class="nav-icon">◎</span>Profile</a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="mini-progress">
+          <div class="mini-progress-heading"><span>Weekly target</span><strong id="sidebar-weekly-percent">0%</strong></div>
+          <div class="progress-track"><span id="sidebar-progress-bar" style="width: 0%"></span></div>
+          <small id="sidebar-progress-label">0h 00m of 5h complete</small>
+        </div>
+        <button class="nav-item settings-button" id="settings-button" type="button"><span class="nav-icon">⚙</span>Settings</button>
+      </div>
+    </aside>
+
+    <main class="main-content" id="top">
+      <header class="topbar">
+        <div class="breadcrumb"><span>Workspace</span><b>/</b><strong id="page-label">Overview</strong></div>
+        <div class="topbar-actions">
+          <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark theme" aria-pressed="false"><span class="theme-icon" aria-hidden="true">☾</span><span class="theme-label">Dark</span></button>
+          <button class="icon-button notification-button" type="button" aria-label="View notifications">♢<span class="notification-dot"></span></button>
+          <button class="menu-button" type="button" aria-label="Open navigation">☰</button>
+          <button class="logout-button" id="logout-button" type="button">Log out</button>
+        </div>
+      </header>
+
+      <div class="page" data-view="dashboard">
+      <section class="page-intro" id="overview">
+        <div>
+          <p class="kicker" id="overview-date">Today</p>
+          <h1><span id="overview-greeting">Good morning</span>, <span id="dashboard-user-name">there</span><span class="accent-dot">.</span></h1>
+          <p class="intro-copy">Small steps, repeated often. Here is your week in code.</p>
+        </div>
+        <button class="primary-button" id="log-session" type="button"><span>+</span> Log a session</button>
+      </section>
+
+      <section class="stats-grid" aria-label="Progress summary">
+        <article class="stat-card accent-card" id="dashboard-solved-card">
+          <div class="stat-label"><span class="stat-icon">↗</span>Problems solved</div>
+          <div class="stat-value" id="dashboard-solved">--</div>
+          <div class="stat-meta positive" id="dashboard-month-progress">0 submissions this month <span>↗</span></div>
+          <div class="sparkline" aria-hidden="true"><span style="height: 30%"></span><span style="height: 45%"></span><span style="height: 35%"></span><span style="height: 60%"></span><span style="height: 48%"></span><span style="height: 75%"></span><span style="height: 92%"></span><span style="height: 82%"></span></div>
+        </article>
+        <article class="stat-card" id="dashboard-streak-card">
+          <div class="stat-label"><span class="stat-icon orange">◷</span>Current streak</div>
+          <div class="stat-value" id="dashboard-streak">-- <small>days</small></div>
+          <div class="stat-meta" id="dashboard-best-streak">Best streak is <strong>0 days</strong></div>
+          <div class="streak-dots" aria-label="14 day streak"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </article>
+        <article class="stat-card" id="dashboard-focus-card">
+          <div class="stat-label"><span class="stat-icon pink">✦</span>Focus time</div>
+          <div class="stat-value" id="dashboard-focus">0 <small>hrs</small></div>
+          <div class="stat-meta positive" id="dashboard-focus-progress">0 hrs logged this week <span>↗</span></div>
+          <div class="focus-bar"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        </article>
+      </section>
+
+      <div class="content-grid">
+        <section class="panel activity-panel" id="overview-activity">
+          <div class="panel-heading">
+            <div><p class="kicker">Consistency</p><h2>Activity</h2></div>
+            <button class="select-button" type="button">Last 12 weeks <span>⌄</span></button>
+          </div>
+          <div class="activity-summary"><strong id="activity-session-count">0</strong><span>coding sessions in the last 3 months</span></div>
+          <div class="heatmap-wrap">
+            <div class="month-labels" id="overview-month-labels"><span>Jul</span><span>Aug</span><span>Sep</span></div>
+            <div class="heatmap" id="heatmap" aria-label="Coding activity heatmap"></div>
+          </div>
+          <div class="heatmap-legend"><span>Less</span><i class="level-0"></i><i class="level-1"></i><i class="level-2"></i><i class="level-3"></i><i class="level-4"></i><span>More</span></div>
+        </section>
+
+        <section class="panel goals-panel" id="overview-goals">
+          <div class="panel-heading"><div><p class="kicker">Next milestones</p><h2>Goals</h2></div><button class="more-button" type="button" aria-label="More goal options">•••</button></div>
+          <div class="goal-list">
+            <div class="goal-row"><div class="goal-ring ring-green" id="goal-progress-ring">0%</div><div class="goal-copy"><strong>LeetCode problem goal</strong><span id="goal-progress-copy">0 of 500 problems</span><div class="tiny-track"><i id="goal-progress-track" style="width:0%"></i></div></div><span class="goal-arrow">→</span></div>
+            <div class="goal-row"><div class="goal-ring ring-blue">--</div><div class="goal-copy"><strong>Build a portfolio project</strong><span>Track this in your personal goals</span><div class="tiny-track blue-track"><i style="width:0%"></i></div></div><span class="goal-arrow">→</span></div>
+            <div class="goal-row"><div class="goal-ring ring-yellow">--</div><div class="goal-copy"><strong>SQL fundamentals</strong><span>Track this in your personal goals</span><div class="tiny-track yellow-track"><i style="width:0%"></i></div></div><span class="goal-arrow">→</span></div>
+          </div>
+          <button class="text-button" type="button" id="new-goal">+ Add a new goal</button>
+        </section>
+      </div>
+
+      <section class="panel recent-panel" id="overview-recent">
+        <div class="panel-heading"><div><p class="kicker">Keep the rhythm</p><h2>Recent sessions</h2></div><button class="text-button" id="view-all-sessions" type="button">View all <span>→</span></button></div>
+        <div class="session-table">
+          <div class="session-row table-header"><span>PROBLEM / SESSION</span><span>TOPIC</span><span>DIFFICULTY</span><span>TIME</span><span>DATE</span></div>
+          <div class="session-row"><div class="problem-name"><span class="problem-badge easy">E</span><strong>Two Sum</strong></div><span>Arrays</span><span class="difficulty easy-text">Easy</span><span>24 min</span><span>Today, 9:42 AM</span></div>
+          <div class="session-row"><div class="problem-name"><span class="problem-badge medium">M</span><strong>Valid Parentheses</strong></div><span>Stack</span><span class="difficulty medium-text">Medium</span><span>38 min</span><span>Yesterday</span></div>
+          <div class="session-row"><div class="problem-name"><span class="problem-badge easy">E</span><strong>Best Time to Buy Stock</strong></div><span>Greedy</span><span class="difficulty easy-text">Easy</span><span>19 min</span><span>Sep 18, 2026</span></div>
+        </div>
+      </section>
+      </div>
+
+      <section class="page hidden" data-view="problems">
+        <section class="page-intro compact-intro"><div><p class="kicker">Your solved library</p><h1>Problems<span class="accent-dot">.</span></h1><p class="intro-copy">Search and filter the problems you have completed.</p></div><button class="primary-button" id="add-problem" type="button"><span>+</span> Add problem</button></section>
+        <section class="panel">
+          <div class="problem-toolbar"><label class="search-box"><span>⌕</span><input id="problem-search" type="search" placeholder="Search problems" aria-label="Search problems"></label><div class="filter-group" role="group" aria-label="Difficulty filters"><button class="filter-button active" data-filter="all" type="button">All</button><button class="filter-button" data-filter="Easy" type="button">Easy</button><button class="filter-button" data-filter="Medium" type="button">Medium</button><button class="filter-button" data-filter="Hard" type="button">Hard</button></div><select id="language-filter" aria-label="Filter by language"><option value="all">All languages</option><option>Python</option><option>C++</option><option>C</option></select><select id="sort-problems" aria-label="Sort problems"><option value="name">Sort: Name</option><option value="difficulty">Sort: Difficulty</option><option value="recent">Sort: Recent</option></select></div>
+          <div class="problem-table" id="problem-table"><div class="problem-table-row table-header"><span>PROBLEM</span><span>DIFFICULTY</span><span>LANGUAGE</span><span>STATUS</span><span>SOLVED</span></div></div><p class="empty-state hidden" id="empty-state">No problems match those filters.</p>
+        </section>
+      </section>
+
+      <section class="page hidden" data-view="stats">
+        <section class="page-intro compact-intro"><div><p class="kicker">Your numbers, decoded</p><h1>Statistics<span class="accent-dot">.</span></h1><p class="intro-copy">See how your problem-solving is growing over time.</p></div><button class="primary-button" id="sync-stats" type="button">↻ Sync LeetCode</button></section>
+        <section class="stats-toolbar panel"><div><p class="kicker">Time range</p><h2 id="stats-range-label">All time</h2></div><div class="filter-group" role="group" aria-label="Statistics time range"><button class="filter-button active" data-stats-range="all" type="button">All time</button><button class="filter-button" data-stats-range="week" type="button">This week</button><button class="filter-button" data-stats-range="month" type="button">This month</button></div></section>
+        <div class="stats-metrics"><article class="panel"><span>Acceptance rate</span><strong id="stats-acceptance">0%</strong></article><article class="panel"><span>Average solving time</span><strong id="stats-average-time">0 min</strong></article><article class="panel"><span>Tracked problems</span><strong id="stats-tracked">0</strong></article></div>
+        <div class="stats-grid two-cards"><article class="stat-card accent-card"><div class="stat-label">Problems solved</div><div class="stat-value" id="stats-solved">--</div><div class="stat-meta positive">From your synced and logged data</div></article><article class="stat-card"><div class="stat-label">Current streak</div><div class="stat-value" id="stats-streak">-- <small>days</small></div><div class="stat-meta">Calculated from activity</div></article></div>
+        <div class="content-grid stats-grid-layout"><section class="panel"><div class="panel-heading"><div><p class="kicker">Difficulty distribution</p><h2>Problems solved</h2></div></div><div class="big-donut"><div><strong id="stats-total-donut">0</strong><span>tracked</span></div></div><div class="donut-legend"><div><i class="legend-easy"></i><span>Easy</span><b id="stats-easy">0</b></div><div><i class="legend-medium"></i><span>Medium</span><b id="stats-medium">0</b></div><div><i class="legend-hard"></i><span>Hard</span><b id="stats-hard">0</b></div></div></section><section class="panel"><div class="panel-heading"><div><p class="kicker">Toolkit</p><h2>Language usage</h2></div></div><div class="language-usage" id="language-usage"></div></section><section class="panel stats-chart-panel"><div class="panel-heading"><div><p class="kicker">Momentum</p><h2>Problems over time</h2></div></div><div class="line-chart tall-chart"><div class="chart-y"><span>40</span><span>30</span><span>20</span><span>10</span><span>0</span></div><div class="chart-area"><div class="grid-lines"><i></i><i></i><i></i><i></i><i></i></div><svg viewBox="0 0 520 210" preserveAspectRatio="none" role="img" aria-label="Problems solved over time"><path class="chart-area-fill" d="M0 190 L520 190 Z"></path><path class="chart-line" d="M0 190 L520 190"></path><circle cx="520" cy="190" r="5"></circle></svg><div class="chart-x"><span>Jan</span><span>Apr</span><span>Jul</span><span>Sep</span></div></div></div></section></div>
+      </section>
+
+      <section class="page hidden" data-view="activity">
+        <section class="page-intro compact-intro"><div><p class="kicker">Show up often</p><h1>Activity<span class="accent-dot">.</span></h1><p class="intro-copy">Your coding trail, one session at a time.</p></div></section>
+        <section class="activity-toolbar panel"><div><p class="kicker">Date range</p><h2 id="activity-range-label">This month</h2></div><div class="filter-group"><button class="filter-button" data-activity-range="week" type="button">7 days</button><button class="filter-button active" data-activity-range="month" type="button">Month</button><button class="filter-button" data-activity-range="all" type="button">All time</button></div></section><div class="activity-summary-grid"><article class="panel"><span>Submissions</span><strong id="activity-submissions">0</strong></article><article class="panel"><span>Problems solved</span><strong id="activity-solved">0</strong></article><article class="panel"><span>Active days</span><strong id="activity-active-days">0</strong></article></div><section class="panel monthly-summary"><p class="kicker">Monthly summary</p><h2 id="monthly-summary-title">This month</h2><p id="monthly-summary-copy">No LeetCode activity synced yet.</p></section>
+        <div class="content-grid activity-grid"><section class="panel"><div class="panel-heading"><div><p class="kicker">September 2026</p><h2>Coding streak</h2></div><span class="panel-badge">14 day streak</span></div><div class="streak-calendar"><div class="week-labels"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div><div class="calendar-grid" id="calendar-grid"></div></div><div class="heatmap-legend"><span>Less</span><i class="level-0"></i><i class="level-1"></i><i class="level-2"></i><i class="level-3"></i><span>More</span></div></section><section class="panel timeline-panel"><div class="panel-heading"><div><p class="kicker">Latest sessions</p><h2>Recent activity</h2></div></div><div class="timeline" id="activity-timeline"></div></section></div>
+        <section class="panel goal-banner"><div><p class="kicker">2026 coding goal</p><h2>500 problems</h2><p><span id="activity-goal-completed">0</span> completed. Keep the rhythm going.</p></div><div class="goal-progress"><strong id="activity-goal-percent">0%</strong><div class="progress-track"><span id="activity-goal-progress" style="width:0%"></span></div><small><span id="activity-goal-remaining">500</span> problems to go</small></div></section>
+      </section>
+
+      <section class="page hidden" data-view="profile">
+        <section class="page-intro compact-intro"><div><p class="kicker">About the coder</p><h1>Profile<span class="accent-dot">.</span></h1><p class="intro-copy">Your learning story, links, and contact details in one place.</p></div><button class="primary-button" id="edit-profile" type="button"><span>✎</span> Edit details</button></section>
+        <section class="profile-hero panel"><div class="large-avatar" id="profile-avatar">--</div><div><h2 id="profile-page-name">Your name</h2><p id="profile-page-role">Your role</p><div class="profile-links" id="profile-links"></div><div class="profile-actions"><button class="text-button" id="upload-photo" type="button">✎ Change photo</button><button class="text-button sync-button" id="sync-leetcode" type="button">↻ Sync LeetCode profile</button><button class="text-button" id="share-profile" type="button">↗ Share profile</button></div><input id="photo-input" type="file" accept="image/*" hidden><span class="sync-status" id="sync-status" role="status"></span><button class="text-button retry-sync hidden" id="retry-sync" type="button">Retry sync</button><small class="last-synced" id="last-synced">Not synced yet</small></div></section>
+        <section class="panel github-panel"><div class="panel-heading"><div><p class="kicker">Open source activity</p><h2>GitHub repositories</h2></div><span class="panel-badge" id="github-repo-count">Not synced</span></div><div class="github-stats" id="github-stats"><span>Connect GitHub in your profile to load repository stats.</span></div></section>
+        <div class="content-grid profile-grid"><section class="panel profile-details"><p class="kicker">About me</p><p id="profile-description">No description added yet.</p><div class="detail-list"><div><span>Course</span><strong id="profile-course">Not added yet</strong></div><div><span>Location</span><strong id="profile-location">Not added yet</strong></div><div><span>Email</span><strong id="profile-email">Not added yet</strong></div></div></section><section class="panel"><p class="kicker">Live LeetCode progress</p><h2>500 LeetCode Problems</h2><div class="progress-track profile-track"><span id="leetcode-goal-progress" style="width:0%"></span></div><p class="profile-goal-meta"><span><strong id="leetcode-solved">0</strong> completed</span><strong id="leetcode-goal-percent">0%</strong></p><div class="profile-stats"><div><strong id="leetcode-easy">0</strong><span>Easy solved</span></div><div><strong id="leetcode-medium">0</strong><span>Medium solved</span></div><div><strong id="leetcode-hard">0</strong><span>Hard solved</span></div></div></section></div>
+        <section class="panel language-profile"><div class="panel-heading"><div><p class="kicker">The toolkit</p><h2>Skills & languages</h2></div></div><div class="language-chips" id="profile-skills"><span class="chip-python">Python</span><span class="chip-cpp">C++</span><span class="chip-c">C</span><span class="chip-web">Web development</span></div></section>
+      </section>
+
+      <footer class="main-footer"><span>Orbit dashboard</span><span>Made for showing up.</span></footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
