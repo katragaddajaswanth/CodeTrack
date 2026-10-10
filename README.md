@@ -250,15 +250,3 @@ demands otherwise.
 **Built for showing up — one session at a time.**
 
 </div>
-
-
-| **Dashboard** | Greeting header, problems solved, monthly progress, current & best streak, focus hours with a weekly 5h target, activity heatmap, goal rings, and a recent-sessions feed. |
-| **Session logging** | Log a session in seconds: problem name, topic, time spent, difficulty, and language. |
-| **Goals** | Create, edit, and delete goals with targets, due dates, and progress rings. Get notified when a goal completes or is due soon. |
-| **Problems** | Searchable, filterable, sortable table merging your logged sessions with LeetCode-synced submissions. |
-| **Statistics** | Acceptance rate, average solving time, difficulty donut, language usage, submissions-over-time chart, and time-range filters (all time / this week / this month). |
-| **Activity** | Date-range summaries (7 days / month / all time), monthly summary, streak calendar with heatmap legend, and a timeline of recent work. |
-| **Profile** | Editable bio, skills, and links; profile photo upload; shareable public profile snapshot; GitHub repository stats via the public API. |
-| **LeetCode sync** | One-click sync with retry, last-synced timestamp, stale-cache fallback, and per-user server-side caching (15-minute TTL). |
-| **Accounts & auth** | Sign up, sign in, guest/offline mode, password reset by email (or link printed to server logs when SMTP is not configured), account email/password changes. |
-| **Extras** | Light/dark theme, hash-based SPA routing, toast notifications, notifications dropdown, JSON/CSV backup export and JSON restore, fully responsive layout. |

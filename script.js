@@ -817,6 +817,9 @@ async function syncLeetCodeProfile(force = false) {
   }
   if (!navigator.onLine && leetcodeStats) {
     renderLeetCodeStats(leetcodeStats);
+    // Refresh heatmap and activity timeline with cached data
+    renderActivity();
+    renderActivityTimeline();
     if (status) status.textContent = "Offline mode: showing cached LeetCode data.";
     return;
   }
